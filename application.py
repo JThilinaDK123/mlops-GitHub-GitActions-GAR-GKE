@@ -9,10 +9,9 @@ app = Flask(__name__)
 
 loaded_model = joblib.load(MODEL_OUTPUT_PATH)
 
-prediction_count = Counter('prediction_count' , "Number of prediction count" )
-
 @app.route('/', methods=['GET','POST'])
 def index():
+    prediction = None
     if request.method == 'POST':
         try:
             lead_time = int(request.form["lead_time"])
@@ -33,25 +32,13 @@ def index():
 
             prediction = loaded_model.predict(features)
 
-            # Count successful predictions
             prediction = loaded_model.predict(features)[0]
-            prediction_count.inc()
-
-            # prediction_counter.labels(model="hotel_booking_model", status="success").inc()
-
-            return render_template('index.html', prediction=prediction[0])
+            print(prediction)
 
         except Exception:
-            # Count failed predictions
-            # prediction_counter.labels(model="hotel_booking_model", status="error").inc()
             return render_template('index.html', prediction="Error occurred")
 
-    return render_template("index.html", prediction=None)
-
-# Expose /metrics endpoint for Prometheus
-@app.route("/metrics")
-def metrics():
-    return Response(generate_latest(), mimetype="text/plain")
+    return render_template("index.html", prediction = prediction)
 
 if __name__=="__main__":
     app.run(debug=True , port=5000 , host="0.0.0.0")
