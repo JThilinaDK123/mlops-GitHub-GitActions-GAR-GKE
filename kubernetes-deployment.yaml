@@ -13,7 +13,7 @@ spec:
         app: mlops-app-project-03
     spec:
       containers:
-      - name: mlops-app-project
+      - name: mlops-project
         image: us-central1-docker.pkg.dev/mlops-thilina/mlops-project/mlops-app-project-03:latest
         ports:
         - containerPort: 5000
