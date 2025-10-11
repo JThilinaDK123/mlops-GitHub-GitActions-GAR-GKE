@@ -10,7 +10,7 @@ env:
     GKE_CLUSTER: "mlops-project-03-cluster"
     GKE_REGION: "us-central1"
     DEPLOYMENT_NAME: "mlops-app-project-03"
-    REPOSITORY_NAME: "us-central1-docker.pkg.dev/mlops-thilina/mlops-project"
+    # REPOSITORY_NAME: "us-central1-docker.pkg.dev/mlops-thilina/mlops-project"
     IMAGE: "us-central1-docker.pkg.dev/mlops-thilina/mlops-project/mlops-app-project-03"
 
 jobs:
@@ -35,6 +35,7 @@ jobs:
               run: |
                 docker build -t $IMAGE:$GITHUB_SHA .
                 docker push $IMAGE:$GITHUB_SHA
+                docker push $IMAGE:latest
 
             - name: GKE Configurations
               run: |
