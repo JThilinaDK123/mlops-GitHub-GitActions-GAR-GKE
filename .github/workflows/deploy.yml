@@ -1,4 +1,4 @@
-name: CI/CD Deployment to GKE
+name: CI/CD Deployment to GCP GKE
 
 on:
     push:
