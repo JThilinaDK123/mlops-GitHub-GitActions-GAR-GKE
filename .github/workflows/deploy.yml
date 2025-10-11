@@ -35,7 +35,6 @@ jobs:
               run: |
                 docker build -t $IMAGE:$GITHUB_SHA .
                 docker push $IMAGE:$GITHUB_SHA
-                docker push $IMAGE:latest
 
             - name: GKE Configurations
               run: |
